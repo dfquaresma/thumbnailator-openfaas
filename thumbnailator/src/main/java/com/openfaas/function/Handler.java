@@ -35,13 +35,9 @@ public class Handler implements com.openfaas.model.IHandler {
         long countAfterMarkSweep = markSweep.getCollectionCount();
         long timeAfterMarkSweep = markSweep.getCollectionTime();
 
-        String processName = java.lang.management.ManagementFactory.getRuntimeMXBean().getName();
-        long pid = Long.parseLong(processName.split("@")[0]);
-
         String output = err + System.lineSeparator();
         if (err.length() == 0) {
-            output = Long.toString(pid) + "," + // Pid
-                Long.toString(after - before) + "," + // Business Logic Time in Milliseconds
+            output = Long.toString(after - before) + "," + // Business Logic Time in Milliseconds
                 Long.toString(countAfterScavenge - countBeforeScavenge) + "," + // Scavenge Number of Collections
                 Long.toString(timeAfterScavenge - timeBeforeScavenge) + "," + // Scavenge Collections Time Spent in Milliseconds
                 Long.toString(countAfterMarkSweep - countBeforeMarkSweep) + "," + // MarkSweep Number of Collections
